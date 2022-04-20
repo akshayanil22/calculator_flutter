@@ -55,40 +55,13 @@ class _MyHomePageState extends State<MyHomePage> {
         operand = btnValue;
       });
     } else if (btnValue == '=') {
-      if (operand == '+') {
-        setState(() {
-          display = (firstNumber + secondNumber).toString();
-          history = firstNumber.toString() + operand + secondNumber.toString();
-        });
-      }
-      if (operand == '-') {
-        setState(() {
-          display = (firstNumber - secondNumber).toString();
-          history = firstNumber.toString() + operand + secondNumber.toString();
-        });
-      }
-      if (operand == 'x') {
-        setState(() {
-          display = (firstNumber * secondNumber).toString();
-          history = firstNumber.toString() + operand + secondNumber.toString();
-        });
-      }
-      if (operand == '/') {
-        setState(() {
-          if (secondNumber != 0) {
-            display = (firstNumber / secondNumber).round().toString();
-            history =
-                firstNumber.toString() + operand + secondNumber.toString();
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Can\'t divisible by Zero')));
-          }
-        });
-      }
-      operand = '=';
+      setState(() {
+        history='';
+      });
+      // operand = '=';
     } else {
       setState(() {
-        if (operand != '=') {
+        if (operand != '=' || operand!='+') {
           result = result + btnValue;
           display = result;
           if(firstNumber!=0){
