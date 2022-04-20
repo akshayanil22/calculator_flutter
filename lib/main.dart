@@ -55,7 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
         operand = btnValue;
       });
     } else if (btnValue == '=') {
-      secondNumber = int.parse(display);
       if (operand == '+') {
         setState(() {
           display = (firstNumber + secondNumber).toString();
@@ -92,6 +91,33 @@ class _MyHomePageState extends State<MyHomePage> {
         if (operand != '=') {
           result = result + btnValue;
           display = result;
+          if(firstNumber!=0){
+            setState(() {
+              secondNumber = int.parse(display);
+              if (operand == '+') {
+                  display = (firstNumber + secondNumber).toString();
+              }
+              if (operand == '-') {
+                  display = (firstNumber - secondNumber).toString();
+              }
+              if (operand == 'x') {
+                  display = (firstNumber * secondNumber).toString();
+              }
+              if (operand == '/') {
+                  if (secondNumber != 0) {
+                    display = (firstNumber / secondNumber).round().toString();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Can\'t divisible by Zero')));
+                  }
+              }
+              if(history!=''){
+                history = history+ operand + secondNumber.toString();
+              }else{
+                history = firstNumber.toString() + operand + secondNumber.toString();
+              }
+            });
+          }
         }
       });
     }
@@ -128,18 +154,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     history,
-                    style: TextStyle(fontSize: 32, color: Colors.white60),
+                    style: const TextStyle(fontSize: 32, color: Colors.white60),
                   ),
                   Text(
                     display,
-                    style: TextStyle(fontSize: 58, color: Colors.white),
+                    style: const TextStyle(fontSize: 58, color: Colors.white),
                   )
                 ],
               ),
               decoration: BoxDecoration(
                   color: Colors.blueGrey.shade600,
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: const Radius.circular(10),
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
                       bottomRight: Radius.circular(10))),
             ),
           ),
